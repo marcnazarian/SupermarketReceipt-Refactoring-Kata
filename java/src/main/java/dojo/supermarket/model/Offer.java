@@ -27,10 +27,6 @@ public class Offer {
             double discountTotal = (unitPrice * 5 - argument) * numberOfXs;
             discount = new Discount(product, "5 for " + argument, discountTotal);
 
-        } else if (offerType == SpecialOfferType.TenPercentDiscount) {
-            double percentageDiscount = argument;
-            discount = new Discount(product, argument + "% off", quantity * unitPrice * percentageDiscount / 100.0);
-
         } else {
             discount = null;
         }
