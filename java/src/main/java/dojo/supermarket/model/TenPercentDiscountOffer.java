@@ -3,7 +3,7 @@ package dojo.supermarket.model;
 public class TenPercentDiscountOffer extends Offer {
     private double percentage = 10.0;
 
-    public TenPercentDiscountOffer(SpecialOfferType tenPercentDiscount, Product product, double argument) {
+    public TenPercentDiscountOffer(Product product) {
         super(SpecialOfferType.TenPercentDiscount, product, 0);
     }
 

@@ -23,9 +23,9 @@ public class Teller {
             case ThreeForTwo:
                 return new ThreeForTwoOffer(product, argument);
             case TenPercentDiscount:
-                return new TenPercentDiscountOffer(SpecialOfferType.TenPercentDiscount, product, argument);
+                return new TenPercentDiscountOffer(product);
             case TwoForAmount:
-                return new Offer(SpecialOfferType.TwoForAmount, product, argument);
+                return new TwoForAmountOffer(product, argument);
             case FiveForAmount:
                 return new Offer(SpecialOfferType.FiveForAmount, product, argument);
         }
