@@ -25,9 +25,9 @@ public class Teller {
             case TenPercentDiscount:
                 return new TenPercentDiscountOffer(product);
             case TwoForAmount:
-                return new TwoForAmountOffer(product, argument);
+                return new NForAmountOffer(product, argument, 2);
             case FiveForAmount:
-                return new Offer(SpecialOfferType.FiveForAmount, product, argument);
+                return new NForAmountOffer(product, argument, 5);
         }
         throw new IllegalArgumentException("unreachable");
     }

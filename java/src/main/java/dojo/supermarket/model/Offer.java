@@ -16,15 +16,7 @@ public class Offer {
     }
 
     Discount calculateDiscount(double quantity, double unitPrice) {
-        Discount discount;
-        if (offerType == SpecialOfferType.FiveForAmount && quantity >= 5) {
-            int numberOfXs = (int) quantity / 5;
-            double discountTotal = (unitPrice * 5 - argument) * numberOfXs;
-            discount = new Discount(product, "5 for " + argument, discountTotal);
-
-        } else {
-            discount = null;
-        }
-        return discount;
+        return null;
     }
+
 }
