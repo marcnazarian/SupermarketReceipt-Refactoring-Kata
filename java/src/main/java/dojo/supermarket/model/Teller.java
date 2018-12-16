@@ -21,7 +21,7 @@ public class Teller {
     private Offer createSpecialOffer(SpecialOfferType offerType, Product product, double argument) {
         switch (offerType) {
             case ThreeForTwo:
-                return new Offer(SpecialOfferType.ThreeForTwo, product, argument);
+                return new ThreeForTwoOffer(product, argument);
             case TenPercentDiscount:
                 return new Offer(SpecialOfferType.TenPercentDiscount, product, argument);
             case TwoForAmount:
