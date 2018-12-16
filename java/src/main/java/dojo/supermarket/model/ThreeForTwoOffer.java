@@ -2,11 +2,11 @@ package dojo.supermarket.model;
 
 public class ThreeForTwoOffer extends Offer {
     public ThreeForTwoOffer(Product product, double unitPrice) {
-        super(SpecialOfferType.ThreeForTwo, product, unitPrice);
+        super(product);
     }
 
     @Override
-    Discount calculateDiscount(double quantity, double unitPrice) { // TODO could remove unitPrice
+    Discount calculateDiscount(double quantity, double unitPrice) {
         Discount discount;
         if (quantity >= 3) {
             int numberOfXs = (int) quantity / 3;

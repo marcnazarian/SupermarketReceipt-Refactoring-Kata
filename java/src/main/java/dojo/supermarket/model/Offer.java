@@ -1,13 +1,9 @@
 package dojo.supermarket.model;
 
-public class Offer {
-    SpecialOfferType offerType;
+public abstract class Offer {
     protected final Product product;
-    double argument;
 
-    public Offer(SpecialOfferType offerType, Product product, double argument) {
-        this.offerType = offerType;
-        this.argument = argument;
+    public Offer(Product product) {
         this.product = product;
     }
 
@@ -15,8 +11,6 @@ public class Offer {
         return this.product;
     }
 
-    Discount calculateDiscount(double quantity, double unitPrice) {
-        return null;
-    }
+    abstract Discount calculateDiscount(double quantity, double unitPrice);
 
 }

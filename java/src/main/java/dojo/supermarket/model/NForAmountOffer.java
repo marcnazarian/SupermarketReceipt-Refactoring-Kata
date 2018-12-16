@@ -5,9 +5,9 @@ public class NForAmountOffer extends Offer {
     private double totalAmountForBoth;
     private final int requiredQuantity;
 
-    public NForAmountOffer(Product product, double totalAmountForBoth, int requiredQuantity) {
-        super(SpecialOfferType.TwoForAmount, product, totalAmountForBoth);
-        this.totalAmountForBoth = totalAmountForBoth;
+    public NForAmountOffer(Product product, double totalAmountForAll, int requiredQuantity) {
+        super(product);
+        this.totalAmountForBoth = totalAmountForAll;
         this.requiredQuantity = requiredQuantity;
     }
 
