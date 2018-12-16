@@ -33,4 +33,8 @@ public class Receipt {
     public List<Discount> getDiscounts() {
         return discounts;
     }
+
+    public void addDiscounts(List<Discount> discounts) {
+        this.discounts.addAll(discounts);
+    }
 }

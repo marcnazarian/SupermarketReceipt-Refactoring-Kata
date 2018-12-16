@@ -33,22 +33,4 @@ public class ShoppingCart {
         }
     }
 
-    void handleOffers(Receipt receipt, Map<Product, Offer> offers, SupermarketCatalog catalog) {
-        for (Product p : productQuantities().keySet()) {
-            double quantity = productQuantities.get(p);
-            if (offers.containsKey(p)) {
-                Offer offer = offers.get(p);
-                double unitPrice = catalog.getUnitPrice(p);
-
-                SpecialOfferType offerType = offer.offerType;
-                Discount discount = offerType.calculateDiscount(p, quantity, unitPrice, offer.argument);
-
-                if (discount != null) {
-                    receipt.addDiscount(discount);
-                }
-            }
-
-        }
-    }
-
 }
