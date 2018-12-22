@@ -5,7 +5,7 @@ import dojo.supermarket.model.Offer;
 import dojo.supermarket.model.Product;
 
 public class ThreeForTwoOffer extends Offer {
-    public ThreeForTwoOffer(Product product, double unitPrice) {
+    public ThreeForTwoOffer(Product product) {
         super(product);
     }
 

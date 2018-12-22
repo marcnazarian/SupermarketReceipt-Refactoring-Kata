@@ -9,14 +9,34 @@ public enum SpecialOfferType {
     public Offer createSpecialOffer(Product product, double argument) {
         switch (this) {
             case ThreeForTwo:
-                return new ThreeForTwoOffer(product, argument);
+                return threeForTwo(product);
             case TenPercentDiscount:
-                return new TenPercentDiscountOffer(product);
+                return tenPercent(product);
             case TwoForAmount:
-                return new NForAmountOffer(product, argument, 2);
+                return twoForAmount(product, argument);
             case FiveForAmount:
-                return new NForAmountOffer(product, argument, 5);
+                return fiveForAmount(product, argument);
         }
         throw new IllegalArgumentException("unreachable");
+    }
+
+    public NForAmountOffer fiveForAmount(Product product, double argument) {
+        return nForAmount(product, argument, 5);
+    }
+
+    public NForAmountOffer twoForAmount(Product product, double argument) {
+        return nForAmount(product, argument, 2);
+    }
+
+    public NForAmountOffer nForAmount(Product product, double amountForAll, int requiredQuantity) {
+        return new NForAmountOffer(product, amountForAll, requiredQuantity);
+    }
+
+    public TenPercentDiscountOffer tenPercent(Product product) {
+        return new TenPercentDiscountOffer(product);
+    }
+
+    public ThreeForTwoOffer threeForTwo(Product product) {
+        return new ThreeForTwoOffer(product);
     }
 }
