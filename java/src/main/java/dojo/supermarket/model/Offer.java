@@ -11,6 +11,6 @@ public abstract class Offer {
         return this.product;
     }
 
-    abstract Discount calculateDiscount(double quantity, double unitPrice);
+    public abstract Discount calculateDiscount(double quantity, double unitPrice);
 
 }

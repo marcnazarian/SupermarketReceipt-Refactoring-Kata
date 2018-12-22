@@ -1,5 +1,7 @@
 package dojo.supermarket.model;
 
+import dojo.supermarket.Offers.SpecialOfferType;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,22 +16,8 @@ public class Teller {
     }
 
     public void addSpecialOffer(SpecialOfferType offerType, Product product, double argument) {
-        Offer offer = createSpecialOffer(offerType, product, argument);
+        Offer offer = offerType.createSpecialOffer(product, argument);
         this.offers.put(product, offer);
-    }
-
-    private Offer createSpecialOffer(SpecialOfferType offerType, Product product, double argument) {
-        switch (offerType) {
-            case ThreeForTwo:
-                return new ThreeForTwoOffer(product, argument);
-            case TenPercentDiscount:
-                return new TenPercentDiscountOffer(product);
-            case TwoForAmount:
-                return new NForAmountOffer(product, argument, 2);
-            case FiveForAmount:
-                return new NForAmountOffer(product, argument, 5);
-        }
-        throw new IllegalArgumentException("unreachable");
     }
 
     public Receipt checksOutArticlesFrom(ShoppingCart theCart) {

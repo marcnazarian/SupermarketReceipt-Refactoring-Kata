@@ -1,5 +1,6 @@
 package dojo.supermarket.model;
 
+import dojo.supermarket.Offers.SpecialOfferType;
 import dojo.supermarket.ReceiptPrinter;
 import org.approvaltests.Approvals;
 import org.junit.jupiter.api.BeforeEach;

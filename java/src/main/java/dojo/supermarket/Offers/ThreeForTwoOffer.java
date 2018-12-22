@@ -1,4 +1,8 @@
-package dojo.supermarket.model;
+package dojo.supermarket.Offers;
+
+import dojo.supermarket.model.Discount;
+import dojo.supermarket.model.Offer;
+import dojo.supermarket.model.Product;
 
 public class ThreeForTwoOffer extends Offer {
     public ThreeForTwoOffer(Product product, double unitPrice) {
@@ -6,7 +10,7 @@ public class ThreeForTwoOffer extends Offer {
     }
 
     @Override
-    Discount calculateDiscount(double quantity, double unitPrice) {
+    public Discount calculateDiscount(double quantity, double unitPrice) {
         Discount discount;
         if (quantity >= 3) {
             int numberOfXs = (int) quantity / 3;
