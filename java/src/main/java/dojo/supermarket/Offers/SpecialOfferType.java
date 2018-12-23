@@ -1,10 +1,8 @@
 package dojo.supermarket.Offers;
 
-import dojo.supermarket.model.Offer;
 import dojo.supermarket.model.Product;
 
-public enum SpecialOfferType {
-    FiveForAmount, TenPercentDiscount, ThreeForTwo, TwoForAmount;
+public class SpecialOfferType {
 
     public static NForAmountOffer fiveForAmount(Product product, double argument) {
         return nForAmount(product, argument, 5);
