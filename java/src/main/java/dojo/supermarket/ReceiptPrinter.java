@@ -27,6 +27,11 @@ public class ReceiptPrinter {
     }
 
     private String discountLine(Discount discount) {
+        DiscountVisitor discountVisitor = new DiscountVisitor();
+        discountVisitor.visitProductname(discount.getProduct());
+        discountVisitor.visitDescription(discount.getDescription());
+        discountVisitor.visitAmount(discount.getDiscountAmount());
+
         String productPresentation = discount.getProduct().getName();
         String pricePresentation = String.format("%.2f", discount.getDiscountAmount());
         String description = discount.getDescription();
