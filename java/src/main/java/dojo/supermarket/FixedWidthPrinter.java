@@ -1,24 +1,22 @@
 package dojo.supermarket;
 
 public class FixedWidthPrinter {
-    private int columns;
+    private int width;
 
-    public FixedWidthPrinter(int columns) {
-
-        this.columns = columns;
+    public FixedWidthPrinter(int width) {
+        this.width = width;
     }
 
-    private static String getWhitespace(int whitespaceSize) {
+    public String formatColumns(String leftColumn, String rightColumn) {
+        return leftColumn + getWhitespace() + rightColumn;
+    }
+
+    private String getWhitespace() {
         StringBuilder whitespace = new StringBuilder();
-        for (int i = 0; i < whitespaceSize; i++) {
+        for (int i = 0; i < width; i++) {
             whitespace.append(" ");
         }
         return whitespace.toString();
     }
 
-    public String formatColumns(String leftColumn, String rightColumn) {
-        String whitespaces = getWhitespace(this.columns - leftColumn.length() - rightColumn.length());
-        return leftColumn +
-                whitespaces + rightColumn;
-    }
 }

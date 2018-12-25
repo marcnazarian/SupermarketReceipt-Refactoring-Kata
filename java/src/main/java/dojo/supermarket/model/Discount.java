@@ -19,7 +19,7 @@ public class Discount {
 
     public String discountLine(FixedWidthPrinter fixedWidthPrinter) {
         String leftColumn = this.description + "(" + product.getName() + ")";
-        String rightColumn = "-" + String.format("%.2f", getDiscountAmount());
+        String rightColumn = "-" + String.format("%.2f", discountAmount);
         return fixedWidthPrinter.formatColumns(leftColumn, rightColumn);
     }
 }

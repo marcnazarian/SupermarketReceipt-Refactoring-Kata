@@ -23,29 +23,21 @@ public class ReceiptItem {
 
         String line = fixedWidthPrinter.formatColumns(product.getName(), price) + "\n";
 
-        if (getQuantity() != 1) {
-            String quantity = presentQuantity(this);
-            String unitPrice = String.format("%.2f", getPrice());
+        if (quantity != 1) {
+            String quantity = presentQuantity();
+            String unitPrice = String.format("%.2f", this.price);
             line += "  " + unitPrice + " * " + quantity + "\n";
         }
         return line;
     }
 
-    public static String presentQuantity(ReceiptItem item) {
-        return ProductUnit.Each.equals(item.product.getUnit())
-                ? String.format("%x", (int) item.getQuantity())
-                : String.format("%.3f", item.getQuantity());
+    private String presentQuantity() {
+        return ProductUnit.Each.equals(this.product.getUnit())
+                ? String.format("%x", (int) this.quantity)
+                : String.format("%.3f", this.quantity);
     }
 
-    public double getPrice() {
-        return this.price;
-    }
-
-    public double getQuantity() {
-        return quantity;
-    }
-
-    public double getTotalPrice() {
+    double getTotalPrice() {
         return totalPrice;
     }
 
