@@ -4,10 +4,12 @@ import dojo.supermarket.model.*;
 
 public class ReceiptPrinter {
 
+    private final FixedWidthPrinter fixedWidthPrinter;
     private final int columns;
 
     public ReceiptPrinter(int columns) {
         this.columns = columns;
+        fixedWidthPrinter = new FixedWidthPrinter(columns);
     }
 
     public String printReceipt(Receipt receipt) {
@@ -28,23 +30,16 @@ public class ReceiptPrinter {
 
     private String discountLine(Discount discount) {
         String productPresentation = discount.getProduct().getName();
-        String pricePresentation = String.format("%.2f", discount.getDiscountAmount());
         String description = discount.getDescription();
         String leftColumn = description + "(" + productPresentation + ")";
-        String rightColumn = "-" + pricePresentation;
-        return formatColumns(leftColumn, rightColumn);
-    }
-
-    private String formatColumns(String leftColumn, String rightColumn) {
-        String whitespaces = getWhitespace(this.columns - leftColumn.length() - rightColumn.length());
-        return leftColumn +
-                whitespaces + rightColumn;
+        String rightColumn = "-" + String.format("%.2f", discount.getDiscountAmount());
+        return fixedWidthPrinter.formatColumns(leftColumn, rightColumn);
     }
 
     private String receiptTotalSection(Receipt receipt) {
         String pricePresentation = String.format("%.2f", (double) receipt.getTotalPrice());
         String total = "Total: ";
-        return formatColumns(total, pricePresentation);
+        return fixedWidthPrinter.formatColumns(total, pricePresentation);
     }
 
     private String receiptItemLine(ReceiptItem item) {
@@ -52,7 +47,7 @@ public class ReceiptPrinter {
         String price = String.format("%.2f", item.getTotalPrice());
         String name = item.getProduct().getName();
 
-        String line1 = formatColumns(name, price);
+        String line1 = fixedWidthPrinter.formatColumns(name, price);
 
         String line = line1 + "\n";
 
@@ -70,11 +65,4 @@ public class ReceiptPrinter {
                 : String.format("%.3f", item.getQuantity());
     }
 
-    private static String getWhitespace(int whitespaceSize) {
-        StringBuilder whitespace = new StringBuilder();
-        for (int i = 0; i < whitespaceSize; i++) {
-            whitespace.append(" ");
-        }
-        return whitespace.toString();
-    }
 }
