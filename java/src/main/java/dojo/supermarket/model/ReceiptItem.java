@@ -19,12 +19,9 @@ public class ReceiptItem {
 
     public String receiptItemLine(FixedWidthPrinter fixedWidthPrinter) {
 
-        String price = String.format("%.2f", getTotalPrice());
-        String name = getProduct().getName();
+        String price = String.format("%.2f", totalPrice);
 
-        String line1 = fixedWidthPrinter.formatColumns(name, price);
-
-        String line = line1 + "\n";
+        String line = fixedWidthPrinter.formatColumns(product.getName(), price) + "\n";
 
         if (getQuantity() != 1) {
             String quantity = presentQuantity(this);
@@ -35,17 +32,13 @@ public class ReceiptItem {
     }
 
     public static String presentQuantity(ReceiptItem item) {
-        return ProductUnit.Each.equals(item.getProduct().getUnit())
+        return ProductUnit.Each.equals(item.product.getUnit())
                 ? String.format("%x", (int) item.getQuantity())
                 : String.format("%.3f", item.getQuantity());
     }
 
     public double getPrice() {
         return this.price;
-    }
-
-    public Product getProduct() {
-        return product;
     }
 
     public double getQuantity() {

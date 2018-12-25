@@ -11,8 +11,7 @@ public class Receipt {
 
     public String receiptTotalSection(FixedWidthPrinter fixedWidthPrinter) {
         String pricePresentation = String.format("%.2f", (double) getTotalPrice());
-        String total = "Total: ";
-        return fixedWidthPrinter.formatColumns(total, pricePresentation);
+        return fixedWidthPrinter.formatColumns("Total: ", pricePresentation);
     }
 
     public void addProduct(Product p, double quantity, double price, double totalPrice) {
@@ -31,7 +30,7 @@ public class Receipt {
         return discounts;
     }
 
-    public void addDiscounts(List<Discount> discounts) {
+    void addDiscounts(List<Discount> discounts) {
         this.discounts.addAll(discounts);
     }
 
