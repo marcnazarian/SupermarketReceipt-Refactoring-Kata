@@ -8,7 +8,7 @@ public class FixedWidthPrinter {
         this.columns = columns;
     }
 
-    static String getWhitespace(int whitespaceSize) {
+    private static String getWhitespace(int whitespaceSize) {
         StringBuilder whitespace = new StringBuilder();
         for (int i = 0; i < whitespaceSize; i++) {
             whitespace.append(" ");
@@ -16,7 +16,7 @@ public class FixedWidthPrinter {
         return whitespace.toString();
     }
 
-    String formatColumns(String leftColumn, String rightColumn) {
+    public String formatColumns(String leftColumn, String rightColumn) {
         String whitespaces = getWhitespace(this.columns - leftColumn.length() - rightColumn.length());
         return leftColumn +
                 whitespaces + rightColumn;

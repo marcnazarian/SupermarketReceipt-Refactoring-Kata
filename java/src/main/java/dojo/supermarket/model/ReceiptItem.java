@@ -1,5 +1,7 @@
 package dojo.supermarket.model;
 
+import dojo.supermarket.FixedWidthPrinter;
+
 import java.util.Objects;
 
 public class ReceiptItem {
@@ -13,6 +15,29 @@ public class ReceiptItem {
         this.quantity = quantity;
         this.price = price;
         this.totalPrice = totalPrice;
+    }
+
+    public String receiptItemLine(FixedWidthPrinter fixedWidthPrinter) {
+
+        String price = String.format("%.2f", getTotalPrice());
+        String name = getProduct().getName();
+
+        String line1 = fixedWidthPrinter.formatColumns(name, price);
+
+        String line = line1 + "\n";
+
+        if (getQuantity() != 1) {
+            String quantity = presentQuantity(this);
+            String unitPrice = String.format("%.2f", getPrice());
+            line += "  " + unitPrice + " * " + quantity + "\n";
+        }
+        return line;
+    }
+
+    public static String presentQuantity(ReceiptItem item) {
+        return ProductUnit.Each.equals(item.getProduct().getUnit())
+                ? String.format("%x", (int) item.getQuantity())
+                : String.format("%.3f", item.getQuantity());
     }
 
     public double getPrice() {
@@ -47,6 +72,4 @@ public class ReceiptItem {
 
         return Objects.hash(product, price, totalPrice, quantity);
     }
-
-
 }

@@ -1,5 +1,7 @@
 package dojo.supermarket.model;
 
+import dojo.supermarket.FixedWidthPrinter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,15 +9,10 @@ public class Receipt {
     private List<ReceiptItem> items = new ArrayList<>();
     private List<Discount> discounts = new ArrayList<>();
 
-    public Double getTotalPrice() {
-        double total = 0.0;
-        for (ReceiptItem item : this.items) {
-            total += item.getTotalPrice();
-        }
-        for (Discount discount : this.discounts) {
-            total -= discount.getDiscountAmount();
-        }
-        return total;
+    public String receiptTotalSection(FixedWidthPrinter fixedWidthPrinter) {
+        String pricePresentation = String.format("%.2f", (double) getTotalPrice());
+        String total = "Total: ";
+        return fixedWidthPrinter.formatColumns(total, pricePresentation);
     }
 
     public void addProduct(Product p, double quantity, double price, double totalPrice) {
@@ -37,4 +34,18 @@ public class Receipt {
     public void addDiscounts(List<Discount> discounts) {
         this.discounts.addAll(discounts);
     }
+
+    private Double getTotalPrice() {
+        double total = 0.0;
+        for (ReceiptItem item : this.items) {
+            total += item.getTotalPrice();
+        }
+        for (Discount discount : this.discounts) {
+            total -= discount.getDiscountAmount();
+        }
+        return total;
+    }
+
+
+
 }

@@ -1,5 +1,7 @@
 package dojo.supermarket.model;
 
+import dojo.supermarket.FixedWidthPrinter;
+
 public class Discount {
     private final String description;
     private final double discountAmount;
@@ -11,16 +13,13 @@ public class Discount {
         this.discountAmount = discountAmount;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public double getDiscountAmount() {
         return discountAmount;
     }
 
-    public Product getProduct() {
-        return product;
+    public String discountLine(FixedWidthPrinter fixedWidthPrinter) {
+        String leftColumn = this.description + "(" + product.getName() + ")";
+        String rightColumn = "-" + String.format("%.2f", getDiscountAmount());
+        return fixedWidthPrinter.formatColumns(leftColumn, rightColumn);
     }
-
 }
