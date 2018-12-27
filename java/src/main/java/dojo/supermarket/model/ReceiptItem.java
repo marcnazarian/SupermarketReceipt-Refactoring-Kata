@@ -3,7 +3,7 @@ package dojo.supermarket.model;
 import java.util.Objects;
 
 public class ReceiptItem {
-    private final Product product;
+    public final Product product;
     private final double price;
     private double totalPrice;
     private final double quantity;
@@ -19,8 +19,8 @@ public class ReceiptItem {
         return this.price;
     }
 
-    public Product getProduct() {
-        return product;
+    public String getProductName() {
+        return product.getName();
     }
 
     public double getQuantity() {
@@ -49,4 +49,7 @@ public class ReceiptItem {
     }
 
 
+    public boolean isProductPerUnit() {
+        return product.isProductPerUnit();
+    }
 }
