@@ -17,8 +17,7 @@ public class ReceiptPrinter {
             result.append(line);
         }
         for (Discount discount : receipt.getDiscounts()) {
-            String discountline = discountLine(discount);
-            result.append(discountline + "\n");
+            result.append(getDiscountLine(discount.getDiscountData()));
         }
         result.append("\n");
         String line = receiptTotalSection(receipt);
@@ -26,19 +25,16 @@ public class ReceiptPrinter {
         return result.toString();
     }
 
-    private String discountLine(Discount discount) {
-        String productPresentation = discount.getProduct().getName();
-        String pricePresentation = String.format("%.2f", discount.getDiscountAmount());
-        String description = discount.getDescription();
-        String leftColumn = description + "(" + productPresentation + ")";
-        String rightColumn = "-" + pricePresentation;
-        return formatColumns(leftColumn, rightColumn);
+    private String getDiscountLine(DiscountData discountData) {
+        String leftColumn = discountData.getDescription() + "(" + discountData.getProductPresentation() + ")";
+        String rightColumn = "-" + String.format("%.2f", discountData.getDiscountAmount());
+
+        return formatColumns(leftColumn, rightColumn) + "\n";
     }
 
     private String formatColumns(String leftColumn, String rightColumn) {
         String whitespaces = getWhitespace(this.columns - leftColumn.length() - rightColumn.length());
-        return leftColumn +
-                whitespaces + rightColumn;
+        return leftColumn + whitespaces + rightColumn;
     }
 
     private String receiptTotalSection(Receipt receipt) {
@@ -77,4 +73,5 @@ public class ReceiptPrinter {
         }
         return whitespace.toString();
     }
+
 }

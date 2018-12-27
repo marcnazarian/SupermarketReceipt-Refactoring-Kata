@@ -1,5 +1,7 @@
 package dojo.supermarket.model;
 
+import dojo.supermarket.DiscountData;
+
 public class Discount {
     private final String description;
     private final double discountAmount;
@@ -23,4 +25,7 @@ public class Discount {
         return product;
     }
 
+    public DiscountData getDiscountData() {
+        return new DiscountData(this.getProduct().getName(), this.getDescription(), this.getDiscountAmount());
+    }
 }
