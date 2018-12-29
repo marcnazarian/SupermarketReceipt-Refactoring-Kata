@@ -4,10 +4,10 @@ import dojo.supermarket.model.*;
 
 public class ReceiptPrinter {
 
-    private final int columns;
+    private final ColumnPrinter columnPrinter;
 
     public ReceiptPrinter(int columns) {
-        this.columns = columns;
+        columnPrinter = new ColumnPrinter(columns);
     }
 
     public String printReceipt(Receipt receipt) {
@@ -27,16 +27,16 @@ public class ReceiptPrinter {
     }
 
     private String discountLine(Discount discount) {
-        return formatColumns(discount.fullDescription(), discount.amountDescription());
+        return columnPrinter.formatColumns(discount.fullDescription(), discount.amountDescription());
     }
 
     private String receiptTotalSection(Receipt receipt) {
-        return formatColumns("Total: ", receipt.totalPrice());
+        return columnPrinter.formatColumns("Total: ", receipt.totalPrice());
     }
 
     private String receiptItemLine(ReceiptItem item) {
 
-        String line1 = formatColumns(item.productName(), item.totalPrice());
+        String line1 = columnPrinter.formatColumns(item.productName(), item.totalPrice());
 
         String line = line1 + "\n";
 
@@ -46,16 +46,4 @@ public class ReceiptPrinter {
         return line;
     }
 
-    private String formatColumns(String leftColumn, String rightColumn) {
-        String whitespaces = getWhitespace(this.columns - leftColumn.length() - rightColumn.length());
-        return leftColumn + whitespaces + rightColumn;
-    }
-
-    private static String getWhitespace(int whitespaceSize) {
-        StringBuilder whitespace = new StringBuilder();
-        for (int i = 0; i < whitespaceSize; i++) {
-            whitespace.append(" ");
-        }
-        return whitespace.toString();
-    }
 }
