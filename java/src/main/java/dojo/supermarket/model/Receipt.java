@@ -37,4 +37,8 @@ public class Receipt {
     public void addDiscounts(List<Discount> discounts) {
         this.discounts.addAll(discounts);
     }
+
+    public String totalPrice() {
+        return String.format("%.2f", (double) getTotalPrice());
+    }
 }

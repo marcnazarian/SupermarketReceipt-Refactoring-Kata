@@ -36,9 +36,7 @@ public class ReceiptPrinter {
     }
 
     private String receiptTotalSection(Receipt receipt) {
-        String pricePresentation = String.format("%.2f", (double) receipt.getTotalPrice());
-        String total = "Total: ";
-        return formatColumns(total, pricePresentation);
+        return formatColumns("Total: ", receipt.totalPrice());
     }
 
     private String receiptItemLine(ReceiptItem item) {
