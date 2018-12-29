@@ -15,11 +15,6 @@ public class Product {
         return name;
     }
 
-
-    public ProductUnit getUnit() {
-        return unit;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -33,5 +28,9 @@ public class Product {
     public int hashCode() {
 
         return Objects.hash(name, unit);
+    }
+
+    boolean isPerUnit() {
+        return ProductUnit.Each.equals(unit);
     }
 }

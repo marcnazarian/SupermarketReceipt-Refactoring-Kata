@@ -11,11 +11,7 @@ public class Discount {
         this.discountAmount = discountAmount;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public double getDiscountAmount() {
+    double getDiscountAmount() {
         return discountAmount;
     }
 
@@ -23,4 +19,11 @@ public class Discount {
         return product;
     }
 
+    public String fullDescription() {
+        return description + "(" + product.getName() + ")";
+    }
+
+    public String amountDescription() {
+        return "-" + String.format("%.2f", discountAmount);
+    }
 }

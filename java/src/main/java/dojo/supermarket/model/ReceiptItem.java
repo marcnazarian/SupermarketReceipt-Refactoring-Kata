@@ -15,10 +15,6 @@ public class ReceiptItem {
         this.totalPrice = totalPrice;
     }
 
-    public double getPrice() {
-        return this.price;
-    }
-
     public Product getProduct() {
         return product;
     }
@@ -27,7 +23,7 @@ public class ReceiptItem {
         return quantity;
     }
 
-    public double getTotalPrice() {
+    double getTotalPrice() {
         return totalPrice;
     }
 
@@ -49,4 +45,19 @@ public class ReceiptItem {
     }
 
 
+    public String productName() {
+        return product.getName();
+    }
+
+    public String totalPrice() {
+        return String.format("%.2f", totalPrice);
+    }
+
+    public String quantityAndPrice() {
+        String quantity = product.isPerUnit()
+                ? String.format("%x", (int) this.quantity)
+                : String.format("%.3f", this.quantity);
+        String unitPrice = String.format("%.2f", this.price);
+        return "  " + unitPrice + " * " + quantity + "\n";
+    }
 }
