@@ -30,11 +30,6 @@ public class ReceiptPrinter {
         return formatColumns(discount.fullDescription(), discount.amountDescription());
     }
 
-    private String formatColumns(String leftColumn, String rightColumn) {
-        String whitespaces = getWhitespace(this.columns - leftColumn.length() - rightColumn.length());
-        return leftColumn + whitespaces + rightColumn;
-    }
-
     private String receiptTotalSection(Receipt receipt) {
         return formatColumns("Total: ", receipt.totalPrice());
     }
@@ -49,6 +44,11 @@ public class ReceiptPrinter {
             line += item.quantityAndPrice();
         }
         return line;
+    }
+
+    private String formatColumns(String leftColumn, String rightColumn) {
+        String whitespaces = getWhitespace(this.columns - leftColumn.length() - rightColumn.length());
+        return leftColumn + whitespaces + rightColumn;
     }
 
     private static String getWhitespace(int whitespaceSize) {
