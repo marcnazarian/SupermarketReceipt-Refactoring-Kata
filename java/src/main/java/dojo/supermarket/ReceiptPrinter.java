@@ -11,70 +11,46 @@ public class ReceiptPrinter {
     }
 
     public String printReceipt(Receipt receipt) {
+        ReceiptBuilder receiptBuilder = new ReceiptBuilder(this.columns);
         StringBuilder result = new StringBuilder();
         for (ReceiptItem item : receipt.getItems()) {
-            String line = receiptItemLine(item);
-            result.append(line);
+            receiptItemLine(item, receiptBuilder);
         }
         for (Discount discount : receipt.getDiscounts()) {
-            String discountline = discountLine(discount);
-            result.append(discountline + "\n");
+            String productPresentation = discount.getProduct().getName();
+            String pricePresentation = String.format("%.2f", discount.getDiscountAmount());
+            String description = discount.getDescription();
+
+            String discountDescription = description + "(" + productPresentation + ")";
+            receiptBuilder.addDiscount(discountDescription, "-" + pricePresentation);
         }
-        result.append("\n");
-        String line = receiptTotalSection(receipt);
-        result.append(line);
+
+        addTotalSection(receipt, receiptBuilder);
+        result.append(receiptBuilder.build());
         return result.toString();
     }
 
-    private String discountLine(Discount discount) {
-        String productPresentation = discount.getProduct().getName();
-        String pricePresentation = String.format("%.2f", discount.getDiscountAmount());
-        String description = discount.getDescription();
-        String leftColumn = description + "(" + productPresentation + ")";
-        String rightColumn = "-" + pricePresentation;
-        return formatColumns(leftColumn, rightColumn);
-    }
-
-    private String formatColumns(String leftColumn, String rightColumn) {
-        String whitespaces = getWhitespace(this.columns - leftColumn.length() - rightColumn.length());
-        return leftColumn +
-                whitespaces + rightColumn;
-    }
-
-    private String receiptTotalSection(Receipt receipt) {
+    private void addTotalSection(Receipt receipt, ReceiptBuilder receiptBuilder) {
         String pricePresentation = String.format("%.2f", (double) receipt.getTotalPrice());
         String total = "Total: ";
-        return formatColumns(total, pricePresentation);
+        receiptBuilder.appendTotalSection(total, pricePresentation);
     }
 
-    private String receiptItemLine(ReceiptItem item) {
+    private void receiptItemLine(ReceiptItem item, ReceiptBuilder receiptBuilder) {
 
         String price = String.format("%.2f", item.getTotalPrice());
         String name = item.getProduct().getName();
 
-        String line1 = formatColumns(name, price);
-
-        String line = line1 + "\n";
+        receiptBuilder.addReceiptItem(name, price);
 
         if (item.getQuantity() != 1) {
-            String quantity = presentQuantity(item);
+            String quantity = ProductUnit.Each.equals(item.getProduct().getUnit())
+                    ? String.format("%x", (int) item.getQuantity())
+                    : String.format("%.3f", item.getQuantity());
             String unitPrice = String.format("%.2f", item.getPrice());
-            line += "  " + unitPrice + " * " + quantity + "\n";
+            String line = "  " + unitPrice + " * " + quantity + "\n";
+            receiptBuilder.addItemQuantity(line);
         }
-        return line;
     }
 
-    private static String presentQuantity(ReceiptItem item) {
-        return ProductUnit.Each.equals(item.getProduct().getUnit())
-                ? String.format("%x", (int) item.getQuantity())
-                : String.format("%.3f", item.getQuantity());
-    }
-
-    private static String getWhitespace(int whitespaceSize) {
-        StringBuilder whitespace = new StringBuilder();
-        for (int i = 0; i < whitespaceSize; i++) {
-            whitespace.append(" ");
-        }
-        return whitespace.toString();
-    }
 }
