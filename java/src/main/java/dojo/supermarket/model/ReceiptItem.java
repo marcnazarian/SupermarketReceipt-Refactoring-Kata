@@ -42,7 +42,7 @@ public class ReceiptItem implements ReceiptElement {
     public void addReceiptSection(receiptVisitor receiptBuilder) {
 
         receiptBuilder.addItem(totalPrice, product.getName());
-
+        // Todo should this be in the receiptBuilder?
         if (quantity != 1) {
             ProductQuantity productQuantity = new ProductQuantity(this.product, this.quantity);
             receiptBuilder.addItemQuantity(this.price, productQuantity);

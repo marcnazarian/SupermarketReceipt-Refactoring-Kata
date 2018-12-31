@@ -21,9 +21,24 @@ public class Receipt implements ReceiptElement {
         return total;
     }
 
+    /**
+     * @deprecated use addProduct(productQuantity, unitPrice) # primitiveObsession
+     */
     public void addProduct(Product p, double quantity, double price, double totalPrice) {
         this.items.add(new ReceiptItem(p, quantity, price, totalPrice));
     }
+
+    public void addProduct(ProductQuantity pq, double unitPrice) {
+        this.items.add(createItem(pq, unitPrice));
+    }
+
+    private ReceiptItem createItem(ProductQuantity pq, double unitPrice) {
+        Product p = pq.getProduct();
+        double quantity = pq.getQuantity();
+        double price = quantity * unitPrice;
+        return new ReceiptItem(p, quantity, unitPrice, price);
+    }
+
 
     public List<ReceiptItem> getItems() {
         return new ArrayList<>(this.items);

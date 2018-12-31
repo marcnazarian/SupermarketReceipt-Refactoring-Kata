@@ -20,8 +20,6 @@ public class receiptVisitor {
     }
 
     public void addItemQuantity(double price, ProductQuantity productQuantity) {
-        // Todo use ProductQuantity
-
         String quantity = productQuantity.quantityDescription();
         String unitPrice = String.format("%.2f", price);
         String line = "  " + unitPrice + " * " + quantity + "\n";
