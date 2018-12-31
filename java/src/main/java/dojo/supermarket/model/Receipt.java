@@ -10,7 +10,7 @@ public class Receipt implements ReceiptElement {
     private List<ReceiptItem> items = new ArrayList<>();
     private List<Discount> discounts = new ArrayList<>();
 
-    private Double getTotalPrice() {
+    private double getTotalPrice() {
         double total = 0.0;
         for (ReceiptItem item : this.items) {
             total += item.getTotalPrice();
@@ -43,8 +43,7 @@ public class Receipt implements ReceiptElement {
 
     @Override
     public void addReceiptSection(receiptVisitor receiptBuilder) {
-        String pricePresentation = String.format("%.2f", (double) getTotalPrice());
-        String total = "Total: ";
-        receiptBuilder.appendTotalSection(total, pricePresentation);
+        receiptBuilder.addReceiptSection(getTotalPrice());
     }
+
 }

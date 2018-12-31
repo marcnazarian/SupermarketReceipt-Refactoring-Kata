@@ -41,18 +41,11 @@ public class ReceiptItem implements ReceiptElement {
     @Override
     public void addReceiptSection(receiptVisitor receiptBuilder) {
 
-        String price = String.format("%.2f", totalPrice);
-        String name = product.getName();
-
-        receiptBuilder.addReceiptItem(name, price);
+        receiptBuilder.addItem(totalPrice, product.getName());
 
         if (quantity != 1) {
-            String quantity = ProductUnit.Each.equals(product.getUnit())
-                    ? String.format("%x", (int) this.quantity)
-                    : String.format("%.3f", this.quantity);
-            String unitPrice = String.format("%.2f", this.price);
-            String line = "  " + unitPrice + " * " + quantity + "\n";
-            receiptBuilder.addItemQuantity(line);
+            receiptBuilder.addItemQuantity(product.getUnit(), this.quantity, this.price);
         }
     }
+
 }
