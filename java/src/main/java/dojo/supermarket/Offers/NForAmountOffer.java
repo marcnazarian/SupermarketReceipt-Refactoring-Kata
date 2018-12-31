@@ -1,7 +1,6 @@
 package dojo.supermarket.Offers;
 
 import dojo.supermarket.model.Discount;
-import dojo.supermarket.model.Offer;
 import dojo.supermarket.model.Product;
 
 // TODO could be implemented with a n for m
@@ -16,17 +15,17 @@ public class NForAmountOffer extends Offer {
     }
 
     @Override
-    public Discount calculateDiscount(double quantity, double unitPrice) {
+    protected Discount getDiscount(int quantity, double unitPrice) {
         Discount discount;
-        if (quantity >= requiredQuantity) {
-            int numberOfXs = (int) quantity / requiredQuantity;
-            double discountForTwo = unitPrice * requiredQuantity - totalAmountForBoth;
-            double discountN = discountForTwo * numberOfXs;
-            discount = new Discount(product, requiredQuantity + " for " + totalAmountForBoth, discountN);
-
-        } else {
-            discount = null;
-        }
+        int numberOfXs = quantity / requiredQuantity;
+        double discountForTwo = unitPrice * requiredQuantity - totalAmountForBoth;
+        double discountN = discountForTwo * numberOfXs;
+        discount = new Discount(product, requiredQuantity + " for " + totalAmountForBoth, discountN);
         return discount;
+    }
+
+    @Override
+    protected boolean discountApplies(double quantity) {
+        return quantity >= requiredQuantity;
     }
 }
