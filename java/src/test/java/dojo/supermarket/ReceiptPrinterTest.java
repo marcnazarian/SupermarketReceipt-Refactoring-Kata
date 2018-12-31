@@ -32,8 +32,7 @@ public class ReceiptPrinterTest {
     // TODO buggy test,
     @Test
     public void total() {
-
-        receipt.addProduct(toothbrush, 1, 0.99, 2 * 0.99);
+        receipt.addProduct(new ProductQuantity(toothbrush, 1), 0.99);
         receipt.addProduct(new ProductQuantity(apples, 0.75), 1.99);
         Approvals.verify(new ReceiptPrinter(40).printReceipt(receipt));
     }
