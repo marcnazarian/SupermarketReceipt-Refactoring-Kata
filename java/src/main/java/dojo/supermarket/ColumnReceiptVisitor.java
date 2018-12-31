@@ -1,10 +1,10 @@
 package dojo.supermarket;
 
-public class ReceiptBuilder {
+public class ColumnReceiptVisitor {
     private int columns;
     private StringBuilder receiptText = new StringBuilder();
 
-    public ReceiptBuilder(int columns) {
+    public ColumnReceiptVisitor(int columns) {
 
         this.columns = columns;
     }

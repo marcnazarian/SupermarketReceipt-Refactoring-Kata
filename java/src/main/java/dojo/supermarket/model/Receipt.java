@@ -1,6 +1,6 @@
 package dojo.supermarket.model;
 
-import dojo.supermarket.ReceiptBuilder;
+import dojo.supermarket.ColumnReceiptVisitor;
 import dojo.supermarket.model.discounts.Discount;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class Receipt implements ReceiptElement {
     }
 
     @Override
-    public void addReceiptSection(ReceiptBuilder receiptBuilder) {
+    public void addReceiptSection(ColumnReceiptVisitor receiptBuilder) {
         String pricePresentation = String.format("%.2f", (double) getTotalPrice());
         String total = "Total: ";
         receiptBuilder.appendTotalSection(total, pricePresentation);

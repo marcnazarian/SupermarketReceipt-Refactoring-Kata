@@ -1,6 +1,6 @@
 package dojo.supermarket.model.discounts;
 
-import dojo.supermarket.ReceiptBuilder;
+import dojo.supermarket.ColumnReceiptVisitor;
 import dojo.supermarket.model.Product;
 
 public class RealDiscount implements Discount {
@@ -19,12 +19,12 @@ public class RealDiscount implements Discount {
     }
 
     @Override
-    public void addReceiptSection(ReceiptBuilder receiptBuilder) {
+    public void addReceiptSection(ColumnReceiptVisitor columnReceiptVisitor) {
         String productPresentation = product.getName();
         String pricePresentation = String.format("%.2f", discountAmount);
         String description = this.description;
 
         String discountDescription = description + "(" + productPresentation + ")";
-        receiptBuilder.addDiscount(discountDescription, "-" + pricePresentation);
+        columnReceiptVisitor.addDiscount(discountDescription, "-" + pricePresentation);
     }
 }
