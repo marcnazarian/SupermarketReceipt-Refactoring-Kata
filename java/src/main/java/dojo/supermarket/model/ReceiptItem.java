@@ -1,5 +1,7 @@
 package dojo.supermarket.model;
 
+import dojo.supermarket.ReceiptBuilder;
+
 import java.util.Objects;
 
 public class ReceiptItem {
@@ -13,18 +15,6 @@ public class ReceiptItem {
         this.quantity = quantity;
         this.price = price;
         this.totalPrice = totalPrice;
-    }
-
-    public double getPrice() {
-        return this.price;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public double getQuantity() {
-        return quantity;
     }
 
     public double getTotalPrice() {
@@ -49,4 +39,20 @@ public class ReceiptItem {
     }
 
 
+    public void addReceiptSection(ReceiptBuilder receiptBuilder) {
+
+        String price = String.format("%.2f", totalPrice);
+        String name = product.getName();
+
+        receiptBuilder.addReceiptItem(name, price);
+
+        if (quantity != 1) {
+            String quantity = ProductUnit.Each.equals(product.getUnit())
+                    ? String.format("%x", (int) this.quantity)
+                    : String.format("%.3f", this.quantity);
+            String unitPrice = String.format("%.2f", this.price);
+            String line = "  " + unitPrice + " * " + quantity + "\n";
+            receiptBuilder.addItemQuantity(line);
+        }
+    }
 }

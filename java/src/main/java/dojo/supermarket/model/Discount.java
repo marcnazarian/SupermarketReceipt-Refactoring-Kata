@@ -1,5 +1,7 @@
 package dojo.supermarket.model;
 
+import dojo.supermarket.ReceiptBuilder;
+
 public class Discount {
     private final String description;
     private final double discountAmount;
@@ -11,16 +13,16 @@ public class Discount {
         this.discountAmount = discountAmount;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public double getDiscountAmount() {
+    double getDiscountAmount() {
         return discountAmount;
     }
 
-    public Product getProduct() {
-        return product;
-    }
+    public void addReceiptSection(ReceiptBuilder receiptBuilder) {
+        String productPresentation = product.getName();
+        String pricePresentation = String.format("%.2f", discountAmount);
+        String description = this.description;
 
+        String discountDescription = description + "(" + productPresentation + ")";
+        receiptBuilder.addDiscount(discountDescription, "-" + pricePresentation);
+    }
 }
