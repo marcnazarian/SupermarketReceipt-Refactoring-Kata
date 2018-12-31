@@ -22,4 +22,11 @@ public class ProductQuantity {
                     ? String.format("%x", (int) quantity)
                     : String.format("%.3f", quantity);
     }
+
+    ReceiptItem createReceiptItem(double unitPrice) {
+        Product p = getProduct();
+        double quantity = getQuantity();
+        double price = quantity * unitPrice;
+        return new ReceiptItem(p, quantity, unitPrice, price);
+    }
 }

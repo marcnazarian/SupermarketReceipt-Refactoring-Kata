@@ -29,14 +29,7 @@ public class Receipt implements ReceiptElement {
     }
 
     public void addProduct(ProductQuantity pq, double unitPrice) {
-        this.items.add(createItem(pq, unitPrice));
-    }
-
-    private ReceiptItem createItem(ProductQuantity pq, double unitPrice) {
-        Product p = pq.getProduct();
-        double quantity = pq.getQuantity();
-        double price = quantity * unitPrice;
-        return new ReceiptItem(p, quantity, unitPrice, price);
+        this.items.add(pq.createReceiptItem(unitPrice));
     }
 
 

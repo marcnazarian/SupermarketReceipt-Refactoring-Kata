@@ -13,27 +13,28 @@ public class ReceiptPrinterTest {
 
     @Test
     public void oneLineItem() {
-        receipt.addProduct(toothbrush, 1, 0.99, 0.99);
+        receipt.addProduct(new ProductQuantity(toothbrush, 1), 0.99);
         Approvals.verify(new ReceiptPrinter(40).printReceipt(receipt));
     }
 
     @Test
     public void quantityTwo() {
-        receipt.addProduct(toothbrush, 2, 0.99,0.99 * 2);
+        receipt.addProduct(new ProductQuantity(toothbrush, 2), 0.99);
         Approvals.verify(new ReceiptPrinter(40).printReceipt(receipt));
     }
 
     @Test
     public void looseWeight() {
-        receipt.addProduct(apples, 2.3, 1.99,1.99 * 2.3);
+        receipt.addProduct(new ProductQuantity(apples, 2.3), 1.99);
         Approvals.verify(new ReceiptPrinter(40).printReceipt(receipt));
     }
 
+    // TODO buggy test,
     @Test
     public void total() {
 
-        receipt.addProduct(toothbrush, 1, 0.99, 2*0.99);
-        receipt.addProduct(apples, 0.75, 1.99, 1.99*0.75);
+        receipt.addProduct(toothbrush, 1, 0.99, 2 * 0.99);
+        receipt.addProduct(new ProductQuantity(apples, 0.75), 1.99);
         Approvals.verify(new ReceiptPrinter(40).printReceipt(receipt));
     }
 
@@ -45,9 +46,9 @@ public class ReceiptPrinterTest {
 
     @Test
     public void printWholeReceipt() {
-        receipt.addProduct(toothbrush, 1, 0.99, 0.99);
-        receipt.addProduct(toothbrush, 2, 0.99, 2*0.99);
-        receipt.addProduct(apples, 0.75, 1.99, 1.99*0.75);
+        receipt.addProduct(new ProductQuantity(toothbrush, 1), 0.99);
+        receipt.addProduct(new ProductQuantity(toothbrush, 2), 0.99);
+        receipt.addProduct(new ProductQuantity(apples, 0.75), 1.99);
         receipt.addDiscount(new RealDiscount(toothbrush, "3 for 2", 0.99));
         Approvals.verify(new ReceiptPrinter(40).printReceipt(receipt));
     }
