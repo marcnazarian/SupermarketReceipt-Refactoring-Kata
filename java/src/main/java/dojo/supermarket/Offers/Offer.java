@@ -1,7 +1,7 @@
 package dojo.supermarket.Offers;
 
-import dojo.supermarket.model.Discount;
-import dojo.supermarket.model.NoDiscount;
+import dojo.supermarket.model.discounts.Discount;
+import dojo.supermarket.model.discounts.NoDiscount;
 import dojo.supermarket.model.Product;
 
 public abstract class Offer {
@@ -16,14 +16,8 @@ public abstract class Offer {
     }
 
     public Discount calculateDiscount(double quantity, double unitPrice) {
-        Discount discount;
-        if (discountApplies(quantity)) {
-            discount = getDiscount((int) quantity, unitPrice);
-
-        } else {
-            discount = new NoDiscount();
-        }
-        return discount;
+        int intQuantity = (int) quantity;
+        return discountApplies(quantity) ? getDiscount(intQuantity, unitPrice) : new NoDiscount();
     }
 
     protected abstract Discount getDiscount(int quantity, double unitPrice);

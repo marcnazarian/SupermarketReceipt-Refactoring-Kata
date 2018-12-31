@@ -1,8 +1,8 @@
 package dojo.supermarket.Offers;
 
-import dojo.supermarket.model.Discount;
+import dojo.supermarket.model.discounts.Discount;
 import dojo.supermarket.model.Product;
-import dojo.supermarket.model.RealDiscount;
+import dojo.supermarket.model.discounts.RealDiscount;
 
 // TODO could be implemented with a n for m
 public class NForAmountOffer extends Offer {

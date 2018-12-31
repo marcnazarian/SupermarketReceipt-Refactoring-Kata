@@ -1,6 +1,7 @@
-package dojo.supermarket.model;
+package dojo.supermarket.model.discounts;
 
 import dojo.supermarket.ReceiptBuilder;
+import dojo.supermarket.model.Product;
 
 public class RealDiscount implements Discount {
     private final String description;
