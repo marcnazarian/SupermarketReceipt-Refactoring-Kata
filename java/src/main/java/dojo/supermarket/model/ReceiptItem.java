@@ -44,7 +44,8 @@ public class ReceiptItem implements ReceiptElement {
         receiptBuilder.addItem(totalPrice, product.getName());
 
         if (quantity != 1) {
-            receiptBuilder.addItemQuantity(product.getUnit(), this.quantity, this.price);
+            ProductQuantity productQuantity = new ProductQuantity(this.product, this.quantity);
+            receiptBuilder.addItemQuantity(this.price, productQuantity);
         }
     }
 

@@ -1,5 +1,6 @@
 package dojo.supermarket;
 
+import dojo.supermarket.model.ProductQuantity;
 import dojo.supermarket.model.ProductUnit;
 
 public class receiptVisitor {
@@ -18,11 +19,10 @@ public class receiptVisitor {
 
     }
 
-    public void addItemQuantity(ProductUnit unit, double quantity1, double price) {
+    public void addItemQuantity(double price, ProductQuantity productQuantity) {
         // Todo use ProductQuantity
-        String quantity = ProductUnit.Each.equals(unit)
-                ? String.format("%x", (int) quantity1)
-                : String.format("%.3f", quantity1);
+
+        String quantity = productQuantity.quantityDescription();
         String unitPrice = String.format("%.2f", price);
         String line = "  " + unitPrice + " * " + quantity + "\n";
         receiptText.append(line);

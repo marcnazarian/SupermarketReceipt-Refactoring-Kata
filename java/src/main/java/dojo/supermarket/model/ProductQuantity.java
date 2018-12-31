@@ -16,4 +16,10 @@ public class ProductQuantity {
     public double getQuantity() {
         return quantity;
     }
+
+    public String quantityDescription() {
+        return ProductUnit.Each.equals(product.getUnit())
+                    ? String.format("%x", (int) quantity)
+                    : String.format("%.3f", quantity);
+    }
 }
