@@ -2,6 +2,7 @@ package dojo.supermarket.Offers;
 
 import dojo.supermarket.model.Discount;
 import dojo.supermarket.model.Product;
+import dojo.supermarket.model.RealDiscount;
 
 public class TenPercentDiscountOffer extends Offer {
     private double percentage = 10.0;
@@ -12,7 +13,7 @@ public class TenPercentDiscountOffer extends Offer {
 
     @Override
     protected Discount getDiscount(int quantity, double unitPrice) {
-        return new Discount(product, percentage + "% off", quantity * unitPrice * percentage / 100.0);
+        return new RealDiscount(product, percentage + "% off", quantity * unitPrice * percentage / 100.0);
     }
 
     @Override

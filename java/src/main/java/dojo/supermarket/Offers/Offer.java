@@ -1,6 +1,7 @@
 package dojo.supermarket.Offers;
 
 import dojo.supermarket.model.Discount;
+import dojo.supermarket.model.NoDiscount;
 import dojo.supermarket.model.Product;
 
 public abstract class Offer {
@@ -20,7 +21,7 @@ public abstract class Offer {
             discount = getDiscount((int) quantity, unitPrice);
 
         } else {
-            discount = null;
+            discount = new NoDiscount();
         }
         return discount;
     }

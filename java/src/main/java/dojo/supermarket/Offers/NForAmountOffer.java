@@ -2,6 +2,7 @@ package dojo.supermarket.Offers;
 
 import dojo.supermarket.model.Discount;
 import dojo.supermarket.model.Product;
+import dojo.supermarket.model.RealDiscount;
 
 // TODO could be implemented with a n for m
 public class NForAmountOffer extends Offer {
@@ -20,7 +21,7 @@ public class NForAmountOffer extends Offer {
         int numberOfXs = quantity / requiredQuantity;
         double discountForTwo = unitPrice * requiredQuantity - totalAmountForBoth;
         double discountN = discountForTwo * numberOfXs;
-        discount = new Discount(product, requiredQuantity + " for " + totalAmountForBoth, discountN);
+        discount = new RealDiscount(product, requiredQuantity + " for " + totalAmountForBoth, discountN);
         return discount;
     }
 

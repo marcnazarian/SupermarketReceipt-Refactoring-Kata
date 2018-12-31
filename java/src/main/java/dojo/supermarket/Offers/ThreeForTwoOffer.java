@@ -2,6 +2,7 @@ package dojo.supermarket.Offers;
 
 import dojo.supermarket.model.Discount;
 import dojo.supermarket.model.Product;
+import dojo.supermarket.model.RealDiscount;
 
 public class ThreeForTwoOffer extends Offer {
     public ThreeForTwoOffer(Product product) {
@@ -12,7 +13,7 @@ public class ThreeForTwoOffer extends Offer {
     protected Discount getDiscount(int quantity, double unitPrice) {
         int numberOfXs = (int) quantity / 3;
         double discountAmount = unitPrice * numberOfXs;
-        return new Discount(product, "3 for 2", discountAmount);
+        return new RealDiscount(product, "3 for 2", discountAmount);
     }
 
     @Override

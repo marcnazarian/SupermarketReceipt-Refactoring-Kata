@@ -40,9 +40,7 @@ public class Teller {
                 double quantity = theCart.productQuantities.get(p);
                 Discount discount = offer.calculateDiscount(quantity, unitPrice);
 
-                if (discount != null) {
-                    discounts.add(discount);
-                }
+                discounts.add(discount);
             }
 
         }
