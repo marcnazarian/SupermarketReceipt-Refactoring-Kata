@@ -9,15 +9,28 @@ public class ReceiptBuilder {
         this.columns = columns;
     }
 
+
+    public void addItemQuantity(String line) {
+        receiptText.append(line);
+
+    }
     public void addReceiptItem(String name, String price) {
         String line = formatColumns(name, price);
         receiptText.append( line + "\n");
 
     }
 
-    public void addItemQuantity(String line) {
-        receiptText.append(line);
 
+    public void addDiscount(String description, String pricePresentation) {
+        String line = formatColumns(description, pricePresentation);
+        receiptText.append( line + "\n");
+
+    }
+
+    public void appendTotalSection(String total, String pricePresentation) {
+        String line = formatColumns(total, pricePresentation);
+        receiptText.append("\n");
+        receiptText.append(line);
     }
 
     public String build() {
@@ -39,15 +52,4 @@ public class ReceiptBuilder {
         return whitespace.toString();
     }
 
-    public void addDiscount(String description, String pricePresentation) {
-        String line = formatColumns(description, pricePresentation);
-        receiptText.append( line + "\n");
-
-    }
-
-    public void appendTotalSection(String total, String pricePresentation) {
-        String line = formatColumns(total, pricePresentation);
-        receiptText.append("\n");
-        receiptText.append(line);
-    }
 }

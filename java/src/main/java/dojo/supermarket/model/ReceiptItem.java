@@ -4,7 +4,7 @@ import dojo.supermarket.ReceiptBuilder;
 
 import java.util.Objects;
 
-public class ReceiptItem {
+public class ReceiptItem implements ReceiptElement {
     private final Product product;
     private final double price;
     private double totalPrice;
@@ -38,7 +38,7 @@ public class ReceiptItem {
         return Objects.hash(product, price, totalPrice, quantity);
     }
 
-
+    @Override
     public void addReceiptSection(ReceiptBuilder receiptBuilder) {
 
         String price = String.format("%.2f", totalPrice);

@@ -6,7 +6,7 @@ import dojo.supermarket.model.discounts.Discount;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Receipt {
+public class Receipt implements ReceiptElement {
     private List<ReceiptItem> items = new ArrayList<>();
     private List<Discount> discounts = new ArrayList<>();
 
@@ -41,6 +41,7 @@ public class Receipt {
         this.discounts.addAll(discounts);
     }
 
+    @Override
     public void addReceiptSection(ReceiptBuilder receiptBuilder) {
         String pricePresentation = String.format("%.2f", (double) getTotalPrice());
         String total = "Total: ";
