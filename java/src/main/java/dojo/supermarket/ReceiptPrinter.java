@@ -12,7 +12,7 @@ public class ReceiptPrinter {
     }
 
     public String printReceipt(Receipt receipt) {
-        ColumnReceiptVisitor receiptBuilder = new ColumnReceiptVisitor(this.columns);
+        receiptVisitor receiptBuilder = new receiptVisitor(this.columns);
         StringBuilder result = new StringBuilder();
         for (ReceiptItem item : receipt.getItems()) {
             item.addReceiptSection(receiptBuilder);

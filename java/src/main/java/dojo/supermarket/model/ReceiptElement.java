@@ -1,7 +1,7 @@
 package dojo.supermarket.model;
 
-import dojo.supermarket.ColumnReceiptVisitor;
+import dojo.supermarket.receiptVisitor;
 
 public interface ReceiptElement {
-    void addReceiptSection(ColumnReceiptVisitor receiptBuilder);
+    void addReceiptSection(receiptVisitor receiptBuilder);
 }

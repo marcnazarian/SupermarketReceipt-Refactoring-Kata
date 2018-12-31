@@ -1,10 +1,10 @@
 package dojo.supermarket.model.discounts;
 
-import dojo.supermarket.ColumnReceiptVisitor;
+import dojo.supermarket.receiptVisitor;
 
 public class NoDiscount implements Discount {
     @Override
-    public void addReceiptSection(ColumnReceiptVisitor receiptBuilder) {
+    public void addReceiptSection(receiptVisitor receiptBuilder) {
         // do nothing of course
     }
 
