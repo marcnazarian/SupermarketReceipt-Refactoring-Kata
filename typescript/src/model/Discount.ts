@@ -1,26 +1,22 @@
-package dojo.supermarket.model;
+import {Product} from "./Product"
 
-public class Discount {
-    private final String description;
-    private final double discountAmount;
-    private final Product product;
+export class Discount {
 
-    public Discount(Product product, String description, double discountAmount) {
-        this.product = product;
-        this.description = description;
-        this.discountAmount = discountAmount;
+    constructor(private readonly product: Product,
+                private readonly description: string,
+                private readonly discountAmount: number) {
     }
 
-    public String getDescription() {
-        return description;
+    getDescription(): string {
+        return this.description;
     }
 
-    public double getDiscountAmount() {
-        return discountAmount;
+    getDiscountAmount(): number {
+        return this.discountAmount;
     }
 
-    public Product getProduct() {
-        return product;
+    getProduct(): Product {
+        return this.product;
     }
 
 }

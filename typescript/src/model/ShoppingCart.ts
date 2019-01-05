@@ -1,66 +1,73 @@
 import {Map} from "typescript"
+import {Product} from "./Product"
+import {SupermarketCatalog} from "./SupermarketCatalog"
+import * as _ from "lodash"
+import {ProductQuantity} from "./ProductQuantity"
+import {Discount} from "./Discount"
+
+type ProductQuantities = { [p: Product]: number }
 
 public class ShoppingCart {
 
-    private final List<ProductQuantity> items = new ArrayList<>();
-    productQuantities: Map<Product, number> = new HashMap<>();
+    private readonly  items: ProductQuantity[] = [];
+    _productQuantities: ProductQuantities = {};
 
 
-    List<ProductQuantity> getItems() {
-        return new ArrayList<>(items);
+    getItems(): ProductQuantity[] {
+        return _.clone(this.items);
     }
 
-    void addItem(Product product) {
+    addItem(product: Product): void {
         this.addItemQuantity(product, 1.0);
     }
 
-    Map<Product, Double> productQuantities() {
-        return productQuantities;
+    productQuantities(): ProductQuantities {
+        return this._productQuantities;
     }
 
 
-    public void addItemQuantity(Product product, double quantity) {
-        items.add(new ProductQuantity(product, quantity));
-        if (productQuantities.containsKey(product)) {
-            productQuantities.put(product, productQuantities.get(product) + quantity);
+    public addItemQuantity(product: Product, quantity: number): void {
+        this.items.push(new ProductQuantity(product, quantity));
+        if (this._productQuantities[product]) {
+            this._productQuantities[product] += quantity;
         } else {
-            productQuantities.put(product, quantity);
+            this._productQuantities[product] = quantity;
         }
     }
 
-    void handleOffers(Receipt receipt, Map<Product, Offer> offers, SupermarketCatalog catalog) {
-        for (Product p: productQuantities().keySet()) {
-            double quantity = productQuantities.get(p);
+    handleOffers(receipt: Receipt,  offers: OffersByProduct, catalog: SupermarketCatalog ):void {
+        for (const p: Product in this.productQuantities().keySet()) {
+            const quantity: number = this._productQuantities[p];
             if (offers.containsKey(p)) {
-                Offer offer = offers.get(p);
-                double unitPrice = catalog.getUnitPrice(p);
-                int quantityAsInt = (int) quantity;
-                Discount discount = null;
-                int x = 1;
+                const offer : Offer = offers[p];
+                const unitPrice: number= catalog.getUnitPrice(p);
+                let quantityAsInt = quantity;
+                let discount : Discount|null = null;
+                let x = 1;
                 if (offer.offerType == SpecialOfferType.ThreeForTwo) {
                     x = 3;
 
                 } else if (offer.offerType == SpecialOfferType.TwoForAmount) {
                     x = 2;
                     if (quantityAsInt >= 2) {
-                        double total = offer.argument * quantityAsInt / x + quantityAsInt % 2 * unitPrice;
-                        double discountN = unitPrice * quantity - total;
+                        const total = offer.argument * quantityAsInt / x + quantityAsInt % 2 * unitPrice;
+                        const discountN = unitPrice * quantity - total;
                         discount = new Discount(p, "2 for " + offer.argument, discountN);
                     }
 
                 } if (offer.offerType == SpecialOfferType.FiveForAmount) {
                     x = 5;
                 }
-                int numberOfXs = quantityAsInt / x;
+                const numberOfXs = quantityAsInt / x;
                 if (offer.offerType == SpecialOfferType.ThreeForTwo && quantityAsInt > 2) {
-                    double discountAmount = quantity * unitPrice - ((numberOfXs * 2 * unitPrice) + quantityAsInt % 3 * unitPrice);
+                    const discountAmount = quantity * unitPrice - ((numberOfXs * 2 * unitPrice) + quantityAsInt % 3 * unitPrice);
                     discount = new Discount(p, "3 for 2", discountAmount);
                 }
                 if (offer.offerType == SpecialOfferType.TenPercentDiscount) {
                     discount = new Discount(p, offer.argument + "% off", quantity * unitPrice * offer.argument / 100.0);
                 }
                 if (offer.offerType == SpecialOfferType.FiveForAmount && quantityAsInt >= 5) {
-                    double discountTotal = unitPrice * quantity - (offer.argument * numberOfXs + quantityAsInt % 5 * unitPrice);
+                    const discountTotal = unitPrice * quantity - (offer.argument * numberOfXs + quantityAsInt % 5 * unitPrice);
                     discount = new Discount(p, x + " for " + offer.argument, discountTotal);
                 }
                 if (discount != null)

@@ -1,19 +1,20 @@
-package dojo.supermarket.model;
+import {Product} from "./Product"
 
-public class ProductQuantity {
-    private final Product product;
-    private final double quantity;
+export class ProductQuantity {
+    private readonly product: Product;
+    private readonly quantity: number;
 
-    public ProductQuantity(Product product, double weight) {
+    constructor(product: Product,
+                           weight: number) {
         this.product = product;
         this.quantity = weight;
     }
 
-    public Product getProduct() {
-        return product;
+    public getProduct(): Product {
+        return this.product;
     }
 
-    public double getQuantity() {
-        return quantity;
+    public getQuantity(): number {
+        return this.quantity;
     }
 }
