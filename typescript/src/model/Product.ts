@@ -1,33 +1,16 @@
-class Product {
-    private final String name;
-    private final ProductUnit unit;
+export class Product {
 
-    public Product(String name, ProductUnit unit) {
-        this.name = name;
-        this.unit = unit;
+    constructor(private readonly name: string,
+                private readonly unit: ProductUnit) {
     }
 
-    public String getName() {
-        return name;
+    public getName(): string {
+        return this.name;
     }
 
 
-    public ProductUnit getUnit() {
-        return unit;
+    public getUnit(): ProductUnit {
+        return this.unit;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return Objects.equals(name, product.name) &&
-                unit == product.unit;
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(name, unit);
-    }
 }

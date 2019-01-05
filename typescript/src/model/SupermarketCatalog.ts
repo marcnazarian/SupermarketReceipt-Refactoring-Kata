@@ -1,8 +1,8 @@
-package dojo.supermarket.model;
+import {Product} from "./Product"
 
-public interface SupermarketCatalog {
-    void addProduct(Product product, double price);
+export interface SupermarketCatalog {
+    addProduct(product: Product , price: number): void;
 
-    double getUnitPrice(Product product);
+    getUnitPrice(product: Product): number;
 
 }

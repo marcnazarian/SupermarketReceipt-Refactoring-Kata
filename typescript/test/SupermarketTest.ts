@@ -1,4 +1,6 @@
 import {FakeCatalog} from "./FakeCatalog"
+import {Product} from "../src/model/Product"
+import {SupermarketCatalog} from "../src/model/SupermarketCatalog"
 
 describe('Supermarket', () => {
     it('TODO decide what to specify', () => {
