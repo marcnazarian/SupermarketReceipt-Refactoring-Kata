@@ -1,5 +1,4 @@
-package dojo.supermarket.model;
 
-public enum ProductUnit {
+export enum ProductUnit {
     Kilo, Each
 }

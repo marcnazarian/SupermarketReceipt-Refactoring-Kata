@@ -1,6 +1,9 @@
 import {FakeCatalog} from "./FakeCatalog"
 import {Product} from "../src/model/Product"
 import {SupermarketCatalog} from "../src/model/SupermarketCatalog"
+import {Receipt} from "../src/model/Receipt"
+import {ShoppingCart} from "../src/model/ShoppingCart"
+import {Teller} from "../src/model/Teller"
 
 describe('Supermarket', () => {
     it('TODO decide what to specify', () => {
@@ -22,4 +25,4 @@ describe('Supermarket', () => {
         // Todo: complete this test
     });
 
-};
+});

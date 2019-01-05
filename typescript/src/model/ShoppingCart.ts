@@ -4,10 +4,14 @@ import {SupermarketCatalog} from "./SupermarketCatalog"
 import * as _ from "lodash"
 import {ProductQuantity} from "./ProductQuantity"
 import {Discount} from "./Discount"
+import {Receipt} from "./Receipt"
+import {Offer} from "./Offer"
+import {SpecialOfferType} from "./SpecialOfferType"
 
 type ProductQuantities = { [p: Product]: number }
+export type OffersByProduct = {[p: Product]: Offer};
 
-public class ShoppingCart {
+export class ShoppingCart {
 
     private readonly  items: ProductQuantity[] = [];
     _productQuantities: ProductQuantities = {};
@@ -36,7 +40,7 @@ public class ShoppingCart {
     }
 
     handleOffers(receipt: Receipt,  offers: OffersByProduct, catalog: SupermarketCatalog ):void {
-        for (const p: Product in this.productQuantities().keySet()) {
+        for (const p: Product in Object.keys(this.productQuantities())) {
             const quantity: number = this._productQuantities[p];
             if (offers.containsKey(p)) {
                 const offer : Offer = offers[p];

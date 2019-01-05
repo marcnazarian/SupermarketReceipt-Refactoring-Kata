@@ -1,17 +1,14 @@
-package dojo.supermarket.model;
+import {Product} from "./Product"
+import {SpecialOfferType} from "./SpecialOfferType"
 
-public class Offer {
-    SpecialOfferType offerType;
-    private final Product product;
-    double argument;
+export class Offer {
 
-    public Offer(SpecialOfferType offerType, Product product, double argument) {
-        this.offerType = offerType;
-        this.argument = argument;
-        this.product = product;
+    public constructor(public offerType: SpecialOfferType,
+                       private readonly product: Product ,
+                       public argument: number) {
     }
 
-    Product getProduct() {
+    getProduct(): Product {
         return this.product;
     }
 

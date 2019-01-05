@@ -1,36 +1,36 @@
-package dojo.supermarket.model;
+import {Discount} from "./Discount"
+import {Product} from "./Product"
+import {ReceiptItem} from "./ReceiptItem"
+import * as _ from "lodash"
 
-import java.util.ArrayList;
-import java.util.List;
+export class Receipt {
+    private items: ReceiptItem[] = [];
+    private discounts: Discount[] = [];
 
-public class Receipt {
-    private List<ReceiptItem> items = new ArrayList<>();
-    private List<Discount> discounts = new ArrayList<>();
-
-    public Double getTotalPrice() {
-        double total = 0.0;
-        for (ReceiptItem item : this.items) {
+    public getTotalPrice(): number {
+        let total = 0.0;
+        for (let item of this.items) {
             total += item.getTotalPrice();
         }
-        for (Discount discount : this.discounts) {
+        for ( let discount of this.discounts) {
             total -= discount.getDiscountAmount();
         }
         return total;
     }
 
-    public void addProduct(Product p, double quantity, double price, double totalPrice) {
-        this.items.add(new ReceiptItem(p, quantity, price, totalPrice));
+    public addProduct( p: Product, quantity: number, price: number, totalPrice: number): void {
+        this.items.push(new ReceiptItem(p, quantity, price, totalPrice));
     }
 
-    public List<ReceiptItem> getItems() {
-        return new ArrayList<>(this.items);
+    public getItems(): ReceiptItem[] {
+        return _.clone(this.items);
     }
 
-    public void addDiscount(Discount discount) {
-        this.discounts.add(discount);
+    public addDiscount( discount: Discount): void {
+        this.discounts.push(discount);
     }
 
-    public List<Discount> getDiscounts() {
-        return discounts;
+    public getDiscounts(): Discount[] {
+        return this.discounts;
     }
 }

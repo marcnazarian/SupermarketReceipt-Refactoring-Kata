@@ -1,3 +1,5 @@
+import {ProductUnit} from "./ProductUnit"
+
 export class Product {
 
     constructor(private readonly name: string,

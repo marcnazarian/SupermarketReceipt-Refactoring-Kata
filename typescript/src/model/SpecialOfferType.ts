@@ -1,5 +1,4 @@
-package dojo.supermarket.model;
 
-public enum SpecialOfferType {
-    ThreeForTwo, TenPercentDiscount, TwoForAmount, FiveForAmount;
+export enum SpecialOfferType {
+    ThreeForTwo, TenPercentDiscount, TwoForAmount, FiveForAmount
 }
