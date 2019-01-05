@@ -1,14 +1,9 @@
-package dojo.supermarket.model;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import {Map} from "typescript"
 
 public class ShoppingCart {
 
     private final List<ProductQuantity> items = new ArrayList<>();
-    Map<Product, Double> productQuantities = new HashMap<>();
+    productQuantities: Map<Product, number> = new HashMap<>();
 
 
     List<ProductQuantity> getItems() {

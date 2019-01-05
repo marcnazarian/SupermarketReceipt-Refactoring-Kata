@@ -1,8 +1,4 @@
-package dojo.supermarket.model;
-
-import java.util.Objects;
-
-public class ReceiptItem {
+class ReceiptItem {
     private final Product product;
     private final double price;
     private double totalPrice;

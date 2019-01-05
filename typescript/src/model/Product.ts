@@ -1,8 +1,4 @@
-package dojo.supermarket.model;
-
-import java.util.Objects;
-
-public class Product {
+class Product {
     private final String name;
     private final ProductUnit unit;
 
