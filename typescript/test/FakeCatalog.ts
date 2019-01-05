@@ -1,20 +1,14 @@
-package dojo.supermarket.model;
 
-import java.util.HashMap;
-import java.util.Map;
+export class FakeCatalog implements SupermarketCatalog {
+    private products: {[key: string]: Product} = {};
+    private prices: {[key: string]: number} = {};
 
-public class FakeCatalog implements SupermarketCatalog {
-    private Map<String, Product> products = new HashMap<>();
-    private Map<String, Double> prices = new HashMap<>();
-
-    @Override
-    public void addProduct(Product product, double price) {
-        this.products.put(product.getName(), product);
-        this.prices.put(product.getName(), price);
+    public addProduct(product: Product, price: number): void {
+        this.products[product.getName()] = product;
+        this.prices[product.getName()] = price;
     }
 
-    @Override
-    public double getUnitPrice(Product p) {
-        return this.prices.get(p.getName());
+    public getUnitPrice(p: Product): number {
+        return this.prices[p.getName()];
     }
 }
