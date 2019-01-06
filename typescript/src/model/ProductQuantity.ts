@@ -17,4 +17,5 @@ export class ProductQuantity {
     public getQuantity(): number {
         return this.quantity;
     }
+
 }
