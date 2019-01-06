@@ -13,7 +13,7 @@ export class Teller {
     }
 
     public addSpecialOffer(offerType: SpecialOfferType , product: Product, argument: number): void {
-        this.offers[product] = new Offer(offerType, product, argument);
+        this.offers[product.getName()] = new Offer(offerType, product, argument);
     }
 
     public checksOutArticlesFrom(theCart: ShoppingCart): Receipt {
