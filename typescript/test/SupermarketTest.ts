@@ -4,6 +4,8 @@ import {SupermarketCatalog} from "../src/model/SupermarketCatalog"
 import {Receipt} from "../src/model/Receipt"
 import {ShoppingCart} from "../src/model/ShoppingCart"
 import {Teller} from "../src/model/Teller"
+import {SpecialOfferType} from "../src/model/SpecialOfferType"
+import {ProductUnit} from "../src/model/ProductUnit"
 
 describe('Supermarket', () => {
     it('TODO decide what to specify', () => {

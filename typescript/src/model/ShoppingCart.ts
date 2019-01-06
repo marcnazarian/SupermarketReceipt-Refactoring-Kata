@@ -42,7 +42,7 @@ export class ShoppingCart {
     handleOffers(receipt: Receipt,  offers: OffersByProduct, catalog: SupermarketCatalog ):void {
         for (const p: Product in Object.keys(this.productQuantities())) {
             const quantity: number = this._productQuantities[p];
-            if (offers.containsKey(p)) {
+            if (offers[p]) {
                 const offer : Offer = offers[p];
                 const unitPrice: number= catalog.getUnitPrice(p);
                 let quantityAsInt = quantity;
