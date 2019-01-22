@@ -1,11 +1,13 @@
 package dojo.supermarket.model;
 
+import dojo.supermarket.ReceiptPrinter;
+import org.approvaltests.Approvals;
 import org.junit.jupiter.api.Test;
 
-public class SupermarketTest {
+class SupermarketTest {
 
     @Test
-    public void testSomething() {
+    void no_special_offer() {
         SupermarketCatalog catalog = new FakeCatalog();
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);
         catalog.addProduct(toothbrush, 0.99);
@@ -20,6 +22,6 @@ public class SupermarketTest {
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
-        // Todo: complete this test
+        Approvals.verify(new ReceiptPrinter().printReceipt(receipt));
     }
 }
