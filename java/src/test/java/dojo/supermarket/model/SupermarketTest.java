@@ -34,13 +34,6 @@ class SupermarketTest {
         Approvals.verify(new ReceiptPrinter().printReceipt(receipt));
     }
 
-
-//    Buy two toothbrushes, get one free. Normal toothbrush price is €0.99
-//            20% discount on apples, normal price €1.99 per kilo.
-//            10% discount on rice, normal price €2.49 per bag
-//    Five tubes of toothpaste for €7.49, normal price €1.79
-//    Two boxes of cherry tomatoes for €0.99, normal price €0.69 per box.
-
     @Test
     void buy_two_toothbrushes_get_one_free_normal_toothbrush_price_is_0_99() {
         cart.addItemQuantity(toothbrush, 2);
@@ -50,4 +43,19 @@ class SupermarketTest {
 
         Approvals.verify(new ReceiptPrinter().printReceipt(receipt));
     }
+
+    @Test
+    void discount_20_percent_on_apples_normal_price_is_1_99_per_kilo() {
+        cart.addItemQuantity(apples, 2.5);
+        teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, apples, 20.0);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        Approvals.verify(new ReceiptPrinter().printReceipt(receipt));
+    }
+
+
+//            10% discount on rice, normal price €2.49 per bag
+//    Five tubes of toothpaste for €7.49, normal price €1.79
+//    Two boxes of cherry tomatoes for €0.99, normal price €0.69 per box.
 }
