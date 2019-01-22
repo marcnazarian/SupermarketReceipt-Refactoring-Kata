@@ -12,6 +12,7 @@ class SupermarketTest {
     private Product apples;
     private Product rice;
     private Product toothpaste;
+    private Product cherry_tomatoes;
     private ShoppingCart cart;
     private Teller teller;
 
@@ -30,6 +31,9 @@ class SupermarketTest {
 
         toothpaste = new Product("toothpaste", ProductUnit.Each);
         catalog.addProduct(toothpaste, 1.79);
+
+        cherry_tomatoes = new Product("cherry tomatoes", ProductUnit.Each);
+        catalog.addProduct(cherry_tomatoes, 0.69);
 
         cart = new ShoppingCart();
         teller = new Teller(catalog);
@@ -85,6 +89,14 @@ class SupermarketTest {
         Approvals.verify(new ReceiptPrinter().printReceipt(receipt));
     }
 
-//    Five tubes of toothpaste for €7.49, normal price €1.79
-//    Two boxes of cherry tomatoes for €0.99, normal price €0.69 per box.
+    @Test
+    void two_boxes_of_cherry_tomatoes_for_0_99_normal_price_0_69() {
+        cart.addItemQuantity(cherry_tomatoes, 2);
+        teller.addSpecialOffer(SpecialOfferType.TwoForAmount, cherry_tomatoes, 0.99);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        Approvals.verify(new ReceiptPrinter().printReceipt(receipt));
+    }
+
 }
