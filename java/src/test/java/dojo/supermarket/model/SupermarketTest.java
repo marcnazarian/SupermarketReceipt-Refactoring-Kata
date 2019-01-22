@@ -11,6 +11,7 @@ class SupermarketTest {
     private Product toothbrush;
     private Product apples;
     private Product rice;
+    private Product toothpaste;
     private ShoppingCart cart;
     private Teller teller;
 
@@ -26,6 +27,9 @@ class SupermarketTest {
 
         rice = new Product("rice", ProductUnit.Each);
         catalog.addProduct(rice, 2.49);
+
+        toothpaste = new Product("toothpaste", ProductUnit.Each);
+        catalog.addProduct(toothpaste, 1.79);
 
         cart = new ShoppingCart();
         teller = new Teller(catalog);
@@ -65,6 +69,16 @@ class SupermarketTest {
     void discount_10_percent_on_rice_normal_price_is_2_49_per_bag() {
         cart.addItemQuantity(rice, 3);
         teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, rice, 10.0);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        Approvals.verify(new ReceiptPrinter().printReceipt(receipt));
+    }
+
+    @Test
+    void five_tubes_of_toothpaste_for_7_49_normal_price_is_1_79_per_tube() {
+        cart.addItemQuantity(toothpaste, 5);
+        teller.addSpecialOffer(SpecialOfferType.FiveForAmount, toothpaste, 7.49);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
