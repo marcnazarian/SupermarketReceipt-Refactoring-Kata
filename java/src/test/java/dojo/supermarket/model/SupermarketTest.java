@@ -2,28 +2,38 @@ package dojo.supermarket.model;
 
 import dojo.supermarket.ReceiptPrinter;
 import org.approvaltests.Approvals;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupermarketTest {
 
+    private SupermarketCatalog catalog;
+    private Product toothbrush;
+    private Product apples;
+    private ShoppingCart cart;
+    private Teller teller;
+
+    @BeforeEach
+    private void setUp() {
+        catalog = new FakeCatalog();
+        toothbrush = new Product("toothbrush", ProductUnit.Each);
+        catalog.addProduct(toothbrush, 0.99);
+        apples = new Product("apples", ProductUnit.Kilo);
+        catalog.addProduct(apples, 1.99);
+        cart = new ShoppingCart();
+        teller = new Teller(catalog);
+    }
+
     @Test
     void no_special_offer() {
-        SupermarketCatalog catalog = new FakeCatalog();
-        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
-        catalog.addProduct(toothbrush, 0.99);
-        Product apples = new Product("apples", ProductUnit.Kilo);
-        catalog.addProduct(apples, 1.99);
-
-        ShoppingCart cart = new ShoppingCart();
         cart.addItemQuantity(apples, 2.5);
-
-        Teller teller = new Teller(catalog);
         teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
         Approvals.verify(new ReceiptPrinter().printReceipt(receipt));
     }
+
 
 //    Buy two toothbrushes, get one free. Normal toothbrush price is €0.99
 //            20% discount on apples, normal price €1.99 per kilo.
@@ -33,16 +43,7 @@ class SupermarketTest {
 
     @Test
     void buy_two_toothbrushes_get_one_free_normal_toothbrush_price_is_0_99() {
-        SupermarketCatalog catalog = new FakeCatalog();
-        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
-        catalog.addProduct(toothbrush, 0.99);
-        Product apples = new Product("apples", ProductUnit.Kilo);
-        catalog.addProduct(apples, 1.99);
-
-        ShoppingCart cart = new ShoppingCart();
         cart.addItemQuantity(toothbrush, 2);
-
-        Teller teller = new Teller(catalog);
         teller.addSpecialOffer(SpecialOfferType.TwoForAmount, toothbrush, 0.99);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
