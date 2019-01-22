@@ -10,16 +10,23 @@ class SupermarketTest {
     private SupermarketCatalog catalog;
     private Product toothbrush;
     private Product apples;
+    private Product rice;
     private ShoppingCart cart;
     private Teller teller;
 
     @BeforeEach
     private void setUp() {
         catalog = new FakeCatalog();
+
         toothbrush = new Product("toothbrush", ProductUnit.Each);
         catalog.addProduct(toothbrush, 0.99);
+
         apples = new Product("apples", ProductUnit.Kilo);
         catalog.addProduct(apples, 1.99);
+
+        rice = new Product("rice", ProductUnit.Each);
+        catalog.addProduct(rice, 2.49);
+
         cart = new ShoppingCart();
         teller = new Teller(catalog);
     }
@@ -54,8 +61,16 @@ class SupermarketTest {
         Approvals.verify(new ReceiptPrinter().printReceipt(receipt));
     }
 
+    @Test
+    void discount_10_percent_on_rice_normal_price_is_2_49_per_bag() {
+        cart.addItemQuantity(rice, 3);
+        teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, rice, 10.0);
 
-//            10% discount on rice, normal price €2.49 per bag
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        Approvals.verify(new ReceiptPrinter().printReceipt(receipt));
+    }
+
 //    Five tubes of toothpaste for €7.49, normal price €1.79
 //    Two boxes of cherry tomatoes for €0.99, normal price €0.69 per box.
 }
