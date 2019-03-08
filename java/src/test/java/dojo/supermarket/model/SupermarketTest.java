@@ -1,9 +1,7 @@
 package dojo.supermarket.model;
 
 import dojo.supermarket.ReceiptPrinter;
-import dojo.supermarket.model.offers.FiveForAmount;
-import dojo.supermarket.model.offers.PercentDiscount;
-import dojo.supermarket.model.offers.TwoForAmount;
+import dojo.supermarket.model.offers.*;
 import org.approvaltests.Approvals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,7 +43,7 @@ class SupermarketTest {
     @Test
     void no_special_offer() {
         cart.addItemQuantity(apples, 2.5);
-        teller.addSpecialOffer(new PercentDiscount(toothbrush, 10.0));
+        teller.addSpecialOffer(new TenPercentDiscount(toothbrush));
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
@@ -65,7 +63,7 @@ class SupermarketTest {
     @Test
     void discount_20_percent_on_apples_normal_price_is_1_99_per_kilo() {
         cart.addItemQuantity(apples, 2.5);
-        teller.addSpecialOffer(new PercentDiscount(apples, 20.0));
+        teller.addSpecialOffer(new TwentyPercentDiscount(apples));
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
@@ -75,7 +73,7 @@ class SupermarketTest {
     @Test
     void discount_10_percent_on_rice_normal_price_is_2_49_per_bag() {
         cart.addItemQuantity(rice, 3);
-        teller.addSpecialOffer(new PercentDiscount(rice, 10.0));
+        teller.addSpecialOffer(new TenPercentDiscount(rice));
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
