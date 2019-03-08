@@ -5,8 +5,8 @@ import dojo.supermarket.model.Product;
 
 public class TwoForAmount extends Offer {
 
-    public TwoForAmount(Product product, double argument) {
-        super(product, argument);
+    public TwoForAmount(Product product, double amount) {
+        super(product, amount);
     }
 
     @Override

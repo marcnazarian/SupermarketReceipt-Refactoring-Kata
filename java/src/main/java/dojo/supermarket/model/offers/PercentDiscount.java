@@ -3,10 +3,10 @@ package dojo.supermarket.model.offers;
 import dojo.supermarket.model.Discount;
 import dojo.supermarket.model.Product;
 
-public class TenPercentDiscount extends Offer {
+public class PercentDiscount extends Offer {
 
-    public TenPercentDiscount(Product product, double argument) {
-        super(product, argument);
+    public PercentDiscount(Product product, double percentDiscount) {
+        super(product, percentDiscount);
     }
 
     @Override
