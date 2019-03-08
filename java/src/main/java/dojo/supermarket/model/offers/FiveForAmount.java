@@ -1,23 +1,12 @@
 package dojo.supermarket.model.offers;
 
-import dojo.supermarket.model.Discount;
 import dojo.supermarket.model.Product;
 
-public class FiveForAmount extends Offer {
+public class FiveForAmount extends NumberOfItemsForAmount {
 
     public FiveForAmount(Product product, double amount) {
-        super(product, amount);
+        super(product, 5, amount);
     }
 
-    @Override
-    public Discount getDiscount(Product p, double quantity, double unitPrice, int quantityAsInt) {
-        if (quantityAsInt < 5) {
-            return null;
-        }
 
-        int x = 5;
-        int numberOfXs = quantityAsInt / x;
-        double discountTotal = unitPrice * quantity - (argument * numberOfXs + quantityAsInt % 5 * unitPrice);
-        return new Discount(p, x + " for " + argument, discountTotal);
-    }
 }
