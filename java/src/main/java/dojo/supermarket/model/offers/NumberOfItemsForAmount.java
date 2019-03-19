@@ -13,14 +13,14 @@ public abstract class NumberOfItemsForAmount extends Offer {
     }
 
     @Override
-    public Discount getDiscount(Product p, double quantity, double unitPrice, int quantityAsInt) {
+    public Discount getDiscount(double quantity, double unitPrice, int quantityAsInt) {
         if (quantityAsInt < numberOfItemsForOffer) {
             return null;
         }
 
         double total = argument * quantityAsInt / numberOfItemsForOffer + quantityAsInt % numberOfItemsForOffer * unitPrice;
         double discountN = unitPrice * quantity - total;
-        return new Discount(p, numberOfItemsForOffer + " for " + argument, discountN);
+        return new Discount(this.getProduct(), numberOfItemsForOffer + " for " + argument, discountN);
     }
 
 }

@@ -43,7 +43,7 @@ public class ShoppingCart {
                 double unitPrice = catalog.getUnitPrice(p);
                 int quantityAsInt = (int) quantity;
 
-                Discount discount = offer.getDiscount(p, quantity, unitPrice, quantityAsInt);
+                Discount discount = offer.getDiscount(quantity, unitPrice, quantityAsInt);
 
                 if (discount != null)
                     receipt.addDiscount(discount);

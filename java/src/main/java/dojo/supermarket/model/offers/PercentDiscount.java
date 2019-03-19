@@ -13,7 +13,7 @@ public abstract class PercentDiscount extends Offer {
     }
 
     @Override
-    public Discount getDiscount(Product p, double quantity, double unitPrice, int quantityAsInt) {
-        return new Discount(p, percentDiscount + "% off", quantity * unitPrice * percentDiscount / 100.0);
+    public Discount getDiscount(double quantity, double unitPrice, int quantityAsInt) {
+        return new Discount(this.getProduct(), percentDiscount + "% off", quantity * unitPrice * percentDiscount / 100.0);
     }
 }
