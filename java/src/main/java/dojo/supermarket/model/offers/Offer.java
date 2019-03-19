@@ -5,10 +5,8 @@ import dojo.supermarket.model.Product;
 
 public abstract class Offer {
     private final Product product;
-    double argument;
 
-    public Offer(Product product, double argument) {
-        this.argument = argument;
+    public Offer(Product product) {
         this.product = product;
     }
 

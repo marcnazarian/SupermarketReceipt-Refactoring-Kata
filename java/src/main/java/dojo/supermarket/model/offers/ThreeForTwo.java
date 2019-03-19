@@ -5,8 +5,8 @@ import dojo.supermarket.model.Product;
 
 public class ThreeForTwo extends Offer {
 
-    public ThreeForTwo(Product product, double argument) {
-        super(product, argument);
+    public ThreeForTwo(Product product) {
+        super(product);
     }
 
     @Override

@@ -8,7 +8,7 @@ public abstract class PercentDiscount extends Offer {
     private double percentDiscount;
 
     PercentDiscount(Product product, double percentDiscount) {
-        super(product, percentDiscount);
+        super(product);
         this.percentDiscount = percentDiscount;
     }
 

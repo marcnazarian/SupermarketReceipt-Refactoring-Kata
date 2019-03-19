@@ -6,10 +6,12 @@ import dojo.supermarket.model.Product;
 public abstract class NumberOfItemsForAmount extends Offer {
 
     private final int numberOfItemsForOffer;
+    private double amount;
 
     NumberOfItemsForAmount(Product product, int numberOfItemsForDiscount, double amount) {
-        super(product, amount);
+        super(product);
         this.numberOfItemsForOffer = numberOfItemsForDiscount;
+        this.amount = amount;
     }
 
     @Override
@@ -18,9 +20,9 @@ public abstract class NumberOfItemsForAmount extends Offer {
             return null;
         }
 
-        double total = argument * quantityAsInt / numberOfItemsForOffer + quantityAsInt % numberOfItemsForOffer * unitPrice;
+        double total = amount * quantityAsInt / numberOfItemsForOffer + quantityAsInt % numberOfItemsForOffer * unitPrice;
         double discountN = unitPrice * quantity - total;
-        return new Discount(this.getProduct(), numberOfItemsForOffer + " for " + argument, discountN);
+        return new Discount(this.getProduct(), numberOfItemsForOffer + " for " + amount, discountN);
     }
 
 }
